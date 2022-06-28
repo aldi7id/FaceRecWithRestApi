@@ -1,0 +1,2954 @@
+Parse script error: PHPMaker: No language file specified in project! Generation aborted!
+<!--##
+
+function fontsize(name, value) {
+	return parseInt(PROJ.BodySize) || 14; // Default 14px if not specified
+}
+
+function fontfamily(name, value) {
+	var font = PROJ.BodyFont || "@font-family-sans-serif";
+	var ar = font.split(",");
+	for (var j in ar) {
+		//if (/^(\w+\s)+\w+$|@/.test(ar[j].trim())) // Unquoted but contains space or contains @
+			ar[j] = "\"" + ar[j] + "\"";
+	}
+	return ar.join(", ");	
+}
+
+var vars = [
+	"ThemeBrandPrimary",
+	"ThemeBrandSuccess",
+	"ThemeBrandInfo",
+	"ThemeBrandWarning",
+	"ThemeBrandDanger",
+	"ThemeBodyBackground",
+	"ThemeTextColor",
+	"ThemeLinkColor",
+	"ThemeLinkColorHover",
+	"ThemeSansFontFamily",
+	"ThemeSerifFontFamily",
+	"ThemeMonoFontFamily",
+	["ThemeBaseFontFamily", fontfamily],
+	["ThemeBaseFontSize", fontsize],
+	"ThemeFontSizeLarge",
+	"ThemeFontSizeSmall",
+	"ThemeFontSizeH1",
+	"ThemeFontSizeH2",
+	"ThemeFontSizeH3",
+	"ThemeFontSizeH4",
+	"ThemeFontSizeH5",
+	"ThemeFontSizeH6",
+	"ThemeLineHeightBase",
+	"ThemeLineHeightComputed",
+	"ThemeHeadingsFontFamily",
+	"ThemeHeadingsFontWeight",
+	"ThemeHeadingsLineHeight",
+	"ThemeHeadingsColor",
+	"ThemePaddingBaseVertical",
+	"ThemePaddingBaseHorizontal",
+	"ThemePaddingLargeVertical",
+	"ThemePaddingLargeHorizontal",
+	"ThemePaddingSmallVertical",
+	"ThemePaddingSmallHorizontal",
+	"ThemePaddingXsVertical",
+	"ThemePaddingXsHorizontal",
+	"ThemeLineHeightLarge",
+	"ThemeLineHeightSmall",
+	"ThemeBaseBorderRadius",
+	"ThemeBorderRadiusLarge",
+	"ThemeBorderRadiusSmall",
+	"ThemeComponentActiveColor",
+	"ThemeComponentActiveBg",
+	"ThemeCaretWidthBase",
+	"ThemeCaretWidthLarge",
+	"ThemeTableCellPadding",
+	"ThemeTableCondensedCellPadding",
+	"ThemeTableBackground",
+	"ThemeTableBackgroundAccent",
+	"ThemeTableBackgroundHover",
+	"ThemeTableBackgroundActive",
+	"ThemeTableBorder",
+	"ThemeBtnFontWeight",
+	"ThemeBtnDefaultColor",
+	"ThemeBtnDefaultBg",
+	"ThemeBtnDefaultBorder",
+	"ThemeBtnPrimaryColor",
+	"ThemeBtnPrimaryBg",
+	"ThemeBtnPrimaryBorder",
+	"ThemeBtnSuccessColor",
+	"ThemeBtnSuccessBg",
+	"ThemeBtnSuccessBorder",
+	"ThemeBtnInfoColor",
+	"ThemeBtnInfoBg",
+	"ThemeBtnInfoBorder",
+	"ThemeBtnWarningColor",
+	"ThemeBtnWarningBg",
+	"ThemeBtnWarningBorder",
+	"ThemeBtnDangerColor",
+	"ThemeBtnDangerBg",
+	"ThemeBtnDangerBorder",
+	"ThemeBtnLinkDisabledColor",
+	"ThemeBtnBorderRadiusBase",
+	"ThemeBtnBorderRadiusLarge",
+	"ThemeBtnBorderRadiusSmall",
+	"ThemeInputBackground",
+	"ThemeInputDisabledBackground",
+	"ThemeInputColor",
+	"ThemeInputBorder",
+	"ThemeInputBorderRadius",
+	"ThemeInputBorderFocus",
+	"ThemeInputColorPlaceholder",
+	"ThemeInputHeightBase",
+	"ThemeInputHeightLarge",
+	"ThemeInputHeightSmall",
+	"ThemeFormGroupMarginBottom",
+	"ThemeLegendColor",
+	"ThemeLegendBorderColor",
+	"ThemeInputGroupAddonBg",
+	"ThemeInputGroupAddonBorderColor",
+	"ThemeDropdownBg",
+	"ThemeDropdownBorder",
+	"ThemeDropdownFallbackBorder",
+	"ThemeDropdownDividerBg",
+	"ThemeDropdownLinkColor",
+	"ThemeDropdownLinkColorHover",
+	"ThemeDropdownLinkHoverBg",
+	"ThemeDropdownLinkActiveColor",
+	"ThemeDropdownLinkActiveBg",
+	"ThemeDropdownLinkDisabledColor",
+	"ThemeDropdownLinkHeaderColor",
+	"ThemeDropdownCaretColor",
+	"ThemeScreenSmMin",
+	"ThemeScreenMdMin",
+	"ThemeScreenLgMin",
+	"ThemeScreenXsMax",
+	"ThemeScreenSmMax",
+	"ThemeScreenMdMax",
+	"ThemeGridColumns",
+	"ThemeGridGutterWidth",
+	"ThemeGridFloatBreakpoint",
+	"ThemeGridFloatBreakpointMax",
+	"ThemeContainerTablet",
+	"ThemeContainerSm",
+	"ThemeContainerDesktop",
+	"ThemeContainerMd",
+	"ThemeContainerLargeDesktop",
+	"ThemeContainerLg",
+	"ThemeNavbarHeight",
+	"ThemeNavbarMarginBottom",
+	"ThemeNavbarBorderRadius",
+	"ThemeNavbarPaddingHorizontal",
+	"ThemeNavbarPaddingVertical",
+	"ThemeNavbarCollapseMaxHeight",
+	"ThemeNavbarDefaultColor",
+	"ThemeNavbarDefaultBg",
+	"ThemeNavbarDefaultBorder",
+	"ThemeNavbarDefaultLinkColor",
+	"ThemeNavbarDefaultLinkHoverColor",
+	"ThemeNavbarDefaultLinkHoverBg",
+	"ThemeNavbarDefaultLinkActiveColor",
+	"ThemeNavbarDefaultLinkActiveBg",
+	"ThemeNavbarDefaultLinkDisabledColor",
+	"ThemeNavbarDefaultLinkDisabledBg",
+	"ThemeNavbarDefaultBrandColor",
+	"ThemeNavbarDefaultBrandHoverColor",
+	"ThemeNavbarDefaultBrandHoverBg",
+	"ThemeNavbarDefaultToggleHoverBg",
+	"ThemeNavbarDefaultToggleIconBarBg",
+	"ThemeNavbarDefaultToggleBorderColor",
+	"ThemeNavbarInverseColor",
+	"ThemeNavbarInverseBg",
+	"ThemeNavbarInverseBorder",
+	"ThemeNavbarInverseLinkColor",
+	"ThemeNavbarInverseLinkHoverColor",
+	"ThemeNavbarInverseLinkHoverBg",
+	"ThemeNavbarInverseLinkActiveColor",
+	"ThemeNavbarInverseLinkActiveBg",
+	"ThemeNavbarInverseLinkDisabledColor",
+	"ThemeNavbarInverseLinkDisabledBg",
+	"ThemeNavbarInverseBrandColor",
+	"ThemeNavbarInverseBrandHoverColor",
+	"ThemeNavbarInverseBrandHoverBg",
+	"ThemeNavbarInverseToggleHoverBg",
+	"ThemeNavbarInverseToggleIconBarBg",
+	"ThemeNavbarInverseToggleBorderColor",
+	"ThemeNavLinkPadding",
+	"ThemeNavLinkHoverBg",
+	"ThemeNavDisabledLinkColor",
+	"ThemeNavDisabledLinkHoverColor",
+	"ThemeNavOpenLinkHoverColor",
+	"ThemeNavTabsBorderColor",
+	"ThemeNavTabsLinkHoverBorderColor",
+	"ThemeNavTabsActiveLinkHoverBg",
+	"ThemeNavTabsActiveLinkHoverColor",
+	"ThemeNavTabsActiveLinkHoverBorderColor",
+	"ThemeNavTabsJustifiedLinkBorderColor",
+	"ThemeNavTabsJustifiedActiveLinkBorderColor",
+	"ThemeNavPillsBorderRadius",
+	"ThemeNavPillsActiveLinkHoverBg",
+	"ThemeNavPillsActiveLinkHoverColor",
+	"ThemePaginationColor",
+	"ThemePaginationBg",
+	"ThemePaginationBorder",
+	"ThemePaginationHoverColor",
+	"ThemePaginationHoverBg",
+	"ThemePaginationHoverBorder",
+	"ThemePaginationActiveColor",
+	"ThemePaginationActiveBg",
+	"ThemePaginationActiveBorder",
+	"ThemePaginationDisabledColor",
+	"ThemePaginationDisabledBg",
+	"ThemePaginationDisabledBorder",
+	"ThemePagerBg",
+	"ThemePagerBorder",
+	"ThemePagerBorderRadius",
+	"ThemePagerHoverBg",
+	"ThemePagerActiveBg",
+	"ThemePagerActiveColor",
+	"ThemePagerDisabledColor",
+	"ThemeJumbotronPadding",
+	"ThemeJumbotronColor",
+	"ThemeJumbotronBg",
+	"ThemeJumbotronHeadingColor",
+	"ThemeJumbotronFontSize",
+	"ThemeJumbotronHeadingFontSize",
+	"ThemeSuccessText",
+	"ThemeSuccessBg",
+	"ThemeSuccessBorder",
+	"ThemeInfoText",
+	"ThemeInfoBg",
+	"ThemeInfoBorder",
+	"ThemeWarningText",
+	"ThemeWarningBg",
+	"ThemeWarningBorder",
+	"ThemeErrorText",
+	"ThemeErrorBg",
+	"ThemeErrorBorder",
+	"ThemeTooltipMaxWidth",
+	"ThemeTooltipColor",
+	"ThemeTooltipBg",
+	"ThemeTooltipOpacity",
+	"ThemeTooltipArrowWidth",
+	"ThemeTooltipArrowColor",
+	"ThemePopoverBg",
+	"ThemePopoverMaxWidth",
+	"ThemePopoverBorderColor",
+	"ThemePopoverFallbackBorderColor",
+	"ThemePopoverTitleBg",
+	"ThemePopoverArrowWidth",
+	"ThemePopoverArrowColor",
+	"ThemePopoverArrowOuterWidth",
+	"ThemePopoverArrowOuterColor",
+	"ThemePopoverArrowOuterFallbackColor",
+	"ThemeLabelDefaultBg",
+	"ThemeLabelPrimaryBg",
+	"ThemeLabelSuccessBg",
+	"ThemeLabelInfoBg",
+	"ThemeLabelWarningBg",
+	"ThemeLabelDangerBg",
+	"ThemeLabelColor",
+	"ThemeLabelLinkHoverColor",
+	"ThemeModalInnerPadding",
+	"ThemeModalTitlePadding",
+	"ThemeModalTitleLineHeight",
+	"ThemeModalContentBg",
+	"ThemeModalContentBorderColor",
+	"ThemeModalContentFallbackBorderColor",
+	"ThemeModalBackdropBg",
+	"ThemeModalBackdropOpacity",
+	"ThemeModalHeaderBorderColor",
+	"ThemeModalFooterBorderColor",
+	"ThemeModalLg",
+	"ThemeModalMd",
+	"ThemeModalSm",
+	"ThemeAlertPadding",
+	"ThemeAlertBorderRadius",
+	"ThemeAlertLinkFontWeight",
+	"ThemeAlertSuccessBg",
+	"ThemeAlertSuccessText",
+	"ThemeAlertSuccessBorder",
+	"ThemeAlertInfoBg",
+	"ThemeAlertInfoText",
+	"ThemeAlertInfoBorder",
+	"ThemeAlertWarningBg",
+	"ThemeAlertWarningText",
+	"ThemeAlertWarningBorder",
+	"ThemeAlertDangerBg",
+	"ThemeAlertDangerText",
+	"ThemeAlertDangerBorder",
+	"ThemeProgressBg",
+	"ThemeProgressBarColor",
+	"ThemeProgressBarBg",
+	"ThemeProgressBarSuccessBg",
+	"ThemeProgressBarWarningBg",
+	"ThemeProgressBarDangerBg",
+	"ThemeProgressBarInfoBg",
+	"ThemeListgroupBg",
+	"ThemeListgroupBorder",
+	"ThemeListgroupBorderRadius",
+	"ThemeListgroupHoverBg",
+	"ThemeListgroupActiveColor",
+	"ThemeListgroupActiveBg",
+	"ThemeListgroupActiveBorder",
+	"ThemeListgroupActiveTextColor",
+	"ThemeListgroupDisabledColor",
+	"ThemeListgroupDisabledBg",
+	"ThemeListgroupDisabledTextColor",
+	"ThemeListgroupLinkColor",
+	"ThemeListgroupLinkHeadingColor",
+	"ThemePanelBg",
+	"ThemePanelBodyPadding",
+	"ThemePanelHeadingPadding",
+	"ThemePanelFooterPadding",
+	"ThemePanelBorderRadius",
+	"ThemePanelInnerBorder",
+	"ThemePanelFooterBg",
+	"ThemePanelDefaultText",
+	"ThemePanelDefaultBorder",
+	"ThemePanelDefaultHeadingBg",
+	"ThemePanelPrimaryText",
+	"ThemePanelPrimaryBorder",
+	"ThemePanelPrimaryHeadingBg",
+	"ThemePanelSuccessText",
+	"ThemePanelSuccessBorder",
+	"ThemePanelSuccessHeadingBg",
+	"ThemePanelInfoText",
+	"ThemePanelInfoBorder",
+	"ThemePanelInfoHeadingBg",
+	"ThemePanelWarningText",
+	"ThemePanelWarningBorder",
+	"ThemePanelWarningHeadingBg",
+	"ThemePanelDangerText",
+	"ThemePanelDangerBorder",
+	"ThemePanelDangerHeadingBg",
+	"ThemeThumbnailPadding",
+	"ThemeThumbnailBg",
+	"ThemeThumbnailBorder",
+	"ThemeThumbnailBorderRadius",
+	"ThemeThumbnailCaptionColor",
+	"ThemeThumbnailCaptionPadding",
+	"ThemeWellBg",
+	"ThemeWellBorder",
+	"ThemeBadgeColor",
+	"ThemeBadgeLinkHoverColor",
+	"ThemeBadgeBg",
+	"ThemeBadgeActiveColor",
+	"ThemeBadgeActiveBg",
+	"ThemeBadgeFontWeight",
+	"ThemeBadgeBorderRadius",
+	"ThemeBreadcrumbPaddingVertical",
+	"ThemeBreadcrumbPaddingHorizontal",
+	"ThemeBreadcrumbBg",
+	"ThemeBreadcrumbColor",
+	"ThemeBreadcrumbActiveColor",
+	"ThemeBreadcrumbSeparator",
+	"ThemeCarouselTextShadow",
+	"ThemeCarouselControlColor",
+	"ThemeCarouselControlWidth",
+	"ThemeCarouselControlOpacity",
+	"ThemeCarouselControlFontSize",
+	"ThemeCarouselIndicatorActiveBg",
+	"ThemeCarouselIndicatorBorderColor",
+	"ThemeCarouselCaptionColor",
+	"ThemeCloseFontWeight",
+	"ThemeCloseColor",
+	"ThemeCloseTextShadow",
+	"ThemeCodeColor",
+	"ThemeCodeBg",
+	"ThemeKbdColor",
+	"ThemeKbdBg",
+	"ThemePreBg",
+	"ThemePreColor",
+	"ThemePreBorderColor",
+	"ThemePreScrollableMaxHeight",
+	"ThemeComponentOffsetHorizontal",
+	"ThemeTextMuted",
+	"ThemeAbbrBorderColor",
+	"ThemeHeadingsSmallColor",
+	"ThemeBlockquoteSmallColor",
+	"ThemeBlockquoteFontSize",
+	"ThemeBlockquoteBorderColor",
+	"ThemePageHeaderBorderColor",
+	"ThemeDlHorizontalOffset",
+	"ThemeHrBorder"	
+];
+
+var Theme = {};
+for (var i in vars) {
+	if (typeof vars[i][0] == "string" && typeof vars[i][1] == "function") {
+		Theme[vars[i][0].replace(/^Theme/, "")] = vars[i][1](vars[i][0], PROJ.GetV(vars[i][0]));
+	} else if (vars[i].indexOf("Color") > -1) { // Color
+		Theme[vars[i].replace(/^Theme/, "")] = (PROJ.GetV(vars[i]) || "inherit");
+	} else {
+		Theme[vars[i].replace(/^Theme/, "")] = PROJ.GetV(vars[i]);
+	}
+}
+##-->
+
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+@gray-base:              #000;
+@gray-darker:            lighten(@gray-base, 13.5%); // #222
+@gray-dark:              lighten(@gray-base, 20%);   // #333
+@gray:                   lighten(@gray-base, 33.5%); // #555
+@gray-light:             lighten(@gray-base, 46.7%); // #777
+@gray-lighter:           lighten(@gray-base, 93.5%); // #eee
+
+@brand-primary:         <!--##=Theme.BrandPrimary##-->;
+@brand-success:         <!--##=Theme.BrandSuccess##-->;
+@brand-info:            <!--##=Theme.BrandInfo##-->;
+@brand-warning:         <!--##=Theme.BrandWarning##-->;
+@brand-danger:          <!--##=Theme.BrandDanger##-->;
+
+//== Scaffolding
+//
+// ## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+@body-bg:               <!--##=Theme.BodyBackground##-->;
+//** Global text color on `<body>`.
+@text-color:            <!--##=Theme.TextColor##-->;
+
+//** Global textual link color.
+@link-color:            <!--##=Theme.LinkColor##-->;
+//** Link hover color set via `darken()` function.
+@link-hover-color:      <!--##=Theme.LinkColorHover##-->;
+//** Link hover decoration.
+@link-hover-decoration: underline;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+@font-family-sans-serif:  <!--##=Theme.SansFontFamily##-->;
+@font-family-serif:       <!--##=Theme.SerifFontFamily##-->;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+@font-family-monospace:   <!--##=Theme.MonoFontFamily##-->;
+@font-family-base:        <!--##=Theme.BaseFontFamily##-->;
+
+@font-size-base:          <!--##=Theme.BaseFontSize##-->px;
+@font-size-large:         <!--##=Theme.FontSizeLarge##-->; // ~18px
+@font-size-small:         <!--##=Theme.FontSizeSmall##-->; // ~12px
+
+@font-size-h1:            <!--##=Theme.FontSizeH1##-->; // ~36px
+@font-size-h2:            <!--##=Theme.FontSizeH2##-->; // ~30px
+@font-size-h3:            <!--##=Theme.FontSizeH3##-->; // ~24px
+@font-size-h4:            <!--##=Theme.FontSizeH4##-->; // ~18px
+@font-size-h5:            <!--##=Theme.FontSizeH5##-->;
+@font-size-h6:            <!--##=Theme.FontSizeH6##-->; // ~12px
+
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:        <!--##=Theme.LineHeightBase##-->; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:    <!--##=Theme.LineHeightComputed##-->; // ~20px
+
+//** By default, this inherits from the `<body>`.
+@headings-font-family:    <!--##=Theme.HeadingsFontFamily##-->;
+@headings-font-weight:    <!--##=Theme.HeadingsFontWeight##-->;
+@headings-line-height:    <!--##=Theme.HeadingsLineHeight##-->;
+@headings-color:          <!--##=Theme.HeadingsColor##-->;
+
+
+//== Iconography
+//
+//## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
+
+//** Load fonts from this directory.
+@icon-font-path:          "../fonts/";
+//** File name for all font files.
+@icon-font-name:          "glyphicons-halflings-regular";
+//** Element ID within SVG icon file.
+@icon-font-svg-id:        "glyphicons_halflingsregular";
+
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+@padding-base-vertical:     <!--##=Theme.PaddingBaseVertical##-->px;
+@padding-base-horizontal:   <!--##=Theme.PaddingBaseHorizontal##-->px;
+
+@padding-large-vertical:    <!--##=Theme.PaddingLargeVertical##-->px;
+@padding-large-horizontal:  <!--##=Theme.PaddingLargeHorizontal##-->px;
+
+@padding-small-vertical:    <!--##=Theme.PaddingSmallVertical##-->px;
+@padding-small-horizontal:  <!--##=Theme.PaddingSmallHorizontal##-->px;
+
+@padding-xs-vertical:       <!--##=Theme.PaddingXsVertical##-->px;
+@padding-xs-horizontal:     <!--##=Theme.PaddingXsHorizontal##-->px;
+
+@line-height-large:         <!--##=Theme.LineHeightLarge##-->;
+@line-height-small:         <!--##=Theme.LineHeightSmall##-->;
+
+@border-radius-base:        <!--##=Theme.BaseBorderRadius##-->px;
+@border-radius-large:       <!--##=Theme.BorderRadiusLarge##-->px;
+@border-radius-small:       <!--##=Theme.BorderRadiusSmall##-->px;
+
+//** Global color for active items (e.g., navs or dropdowns).
+@component-active-color:    <!--##=Theme.ComponentActiveColor##-->;
+//** Global background color for active items (e.g., navs or dropdowns).
+@component-active-bg:       <!--##=Theme.ComponentActiveBg##-->;
+
+//** Width of the `border` for generating carets that indicator dropdowns.
+@caret-width-base:          <!--##=Theme.CaretWidthBase##-->px;
+//** Carets increase slightly in size for larger components.
+@caret-width-large:         <!--##=Theme.CaretWidthLarge##-->px;
+
+
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+//** Padding for `<th>`s and `<td>`s.
+@table-cell-padding:            <!--##=Theme.TableCellPadding##-->px;
+//** Padding for cells in `.table-condensed`.
+@table-condensed-cell-padding:  <!--##=Theme.TableCondensedCellPadding##-->px;
+
+//** Default background color used for all tables.
+@table-bg:                      <!--##=Theme.TableBackground##-->;
+//** Background color used for `.table-striped`.
+@table-bg-accent:               <!--##=Theme.TableBackgroundAccent##-->;
+//** Background color used for `.table-hover`.
+@table-bg-hover:                <!--##=Theme.TableBackgroundHover##-->;
+@table-bg-active:               <!--##=Theme.TableBackgroundActive##-->;
+
+//** Border color for table and cell borders.
+@table-border-color:            <!--##=Theme.TableBorder##-->;
+
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+@btn-font-weight:                <!--##=Theme.BtnFontWeight##-->;
+
+@btn-default-color:              <!--##=Theme.BtnDefaultColor##-->;
+@btn-default-bg:                 <!--##=Theme.BtnDefaultBg##-->;
+@btn-default-border:             <!--##=Theme.BtnDefaultBorder##-->;
+
+@btn-primary-color:              <!--##=Theme.BtnPrimaryColor##-->;
+@btn-primary-bg:                 <!--##=Theme.BtnPrimaryBg##-->;
+@btn-primary-border:             <!--##=Theme.BtnPrimaryBorder##-->;
+
+@btn-success-color:              <!--##=Theme.BtnSuccessColor##-->;
+@btn-success-bg:                 <!--##=Theme.BtnSuccessBg##-->;
+@btn-success-border:             <!--##=Theme.BtnSuccessBorder##-->;
+
+@btn-info-color:                 <!--##=Theme.BtnInfoColor##-->;
+@btn-info-bg:                    <!--##=Theme.BtnInfoBg##-->;
+@btn-info-border:                <!--##=Theme.BtnInfoBorder##-->;
+
+@btn-warning-color:              <!--##=Theme.BtnWarningColor##-->;
+@btn-warning-bg:                 <!--##=Theme.BtnWarningBg##-->;
+@btn-warning-border:             <!--##=Theme.BtnWarningBorder##-->;
+
+@btn-danger-color:               <!--##=Theme.BtnDangerColor##-->;
+@btn-danger-bg:                  <!--##=Theme.BtnDangerBg##-->;
+@btn-danger-border:              <!--##=Theme.BtnDangerBorder##-->;
+
+@btn-link-disabled-color:        <!--##=Theme.BtnLinkDisabledColor##-->;
+
+// Allows for customizing button radius independently from global border radius
+@btn-border-radius-base:         <!--##=Theme.BtnBorderRadiusBase##-->;
+@btn-border-radius-large:        <!--##=Theme.BtnBorderRadiusLarge##-->;
+@btn-border-radius-small:        <!--##=Theme.BtnBorderRadiusSmall##-->;
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+@input-bg:                       <!--##=Theme.InputBackground##-->;
+//** `<input disabled>` background color
+@input-bg-disabled:              <!--##=Theme.InputDisabledBackground##-->;
+
+//** Text color for `<input>`s
+@input-color:                    <!--##=Theme.InputColor##-->;
+//** `<input>` border color
+@input-border:                   <!--##=Theme.InputBorder##-->;
+
+// TODO: Rename `@input-border-radius` to `@input-border-radius-base` in v4
+//** Default `.form-control` border radius
+// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
+@input-border-radius:            @border-radius-base;
+//** Large `.form-control` border radius
+@input-border-radius-large:      @border-radius-large;
+//** Small `.form-control` border radius
+@input-border-radius-small:      @border-radius-small;
+
+//** Border color for inputs on focus
+@input-border-focus:             <!--##=Theme.InputBorderFocus##-->;
+
+//** Placeholder text color
+@input-color-placeholder:        <!--##=Theme.InputColorPlaceholder##-->;
+
+//** Default `.form-control` height
+@input-height-base:              <!--##=Theme.InputHeightBase##-->;
+//** Large `.form-control` height
+@input-height-large:             <!--##=Theme.InputHeightLarge##-->;
+//** Small `.form-control` height
+@input-height-small:             <!--##=Theme.InputHeightSmall##-->;
+
+//** `.form-group` margin
+@form-group-margin-bottom:       <!--##=Theme.FormGroupMarginBottom##-->px;
+
+@legend-color:                   <!--##=Theme.LegendColor##-->;
+@legend-border-color:            <!--##=Theme.LegendBorderColor##-->;
+
+//** Background color for textual input addons
+@input-group-addon-bg:           <!--##=Theme.InputGroupAddonBg##-->;
+//** Border color for textual input addons
+@input-group-addon-border-color: <!--##=Theme.InputGroupAddonBorderColor##-->;
+
+//** Disabled cursor for form controls and buttons.
+@cursor-disabled:                not-allowed;
+
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+
+//** Background for the dropdown menu.
+@dropdown-bg:                    <!--##=Theme.DropdownBg##-->;
+//** Dropdown menu `border-color`.
+@dropdown-border:                <!--##=Theme.DropdownBorder##-->;
+//** Dropdown menu `border-color` **for IE8**.
+@dropdown-fallback-border:       <!--##=Theme.DropdownFallbackBorder##-->;
+//** Divider color for between dropdown items.
+@dropdown-divider-bg:            <!--##=Theme.DropdownDividerBg##-->;
+
+//** Dropdown link text color.
+@dropdown-link-color:            <!--##=Theme.DropdownLinkColor##-->;
+//** Hover color for dropdown links.
+@dropdown-link-hover-color:      <!--##=Theme.DropdownLinkColorHover##-->;
+//** Hover background for dropdown links.
+@dropdown-link-hover-bg:         <!--##=Theme.DropdownLinkHoverBg##-->;
+
+//** Active dropdown menu item text color.
+@dropdown-link-active-color: <!--##=Theme.DropdownLinkActiveColor##-->;
+//** Active dropdown menu item background color.
+@dropdown-link-active-bg: <!--##=Theme.DropdownLinkActiveBg##-->;
+
+//** Disabled dropdown menu item background color.
+@dropdown-link-disabled-color: <!--##=Theme.DropdownLinkDisabledColor##-->;
+
+//** Text color for headers within dropdown menus.
+@dropdown-header-color: <!--##=Theme.DropdownLinkHeaderColor##-->;
+
+// Note: Deprecated @dropdown-caret-color as of v3.1.0
+@dropdown-caret-color:           <!--##=Theme.DropdownCaretColor##-->;
+
+
+//-- Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+//
+// Note: These variables are not generated into the Customizer.
+
+@zindex-navbar:            1000;
+@zindex-dropdown:          1000;
+@zindex-popover:           1060;
+@zindex-tooltip:           1070;
+@zindex-navbar-fixed:      1030;
+@zindex-modal-background:  1040;
+@zindex-modal:             1050;
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `@screen-xs` as of v3.0.1
+@screen-xs:                  480px;
+//** Deprecated `@screen-xs-min` as of v3.2.0
+@screen-xs-min:              @screen-xs;
+//** Deprecated `@screen-phone` as of v3.0.1
+@screen-phone:               @screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `@screen-sm` as of v3.0.1
+@screen-sm:                  768px;
+@screen-sm-min:              <!--##=Theme.ScreenSmMin##-->px;
+//** Deprecated `@screen-tablet` as of v3.0.1
+@screen-tablet:              @screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `@screen-md` as of v3.0.1
+@screen-md:                  992px;
+@screen-md-min:              <!--##=Theme.ScreenMdMin##-->px;
+//** Deprecated `@screen-desktop` as of v3.0.1
+@screen-desktop:             @screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `@screen-lg` as of v3.0.1
+@screen-lg:                  1200px;
+@screen-lg-min:              <!--##=Theme.ScreenLgMin##-->px;
+//** Deprecated `@screen-lg-desktop` as of v3.0.1
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              <!--##=Theme.ScreenXsMax##-->;
+@screen-sm-max:              <!--##=Theme.ScreenSmMax##-->;
+@screen-md-max:              <!--##=Theme.ScreenMdMax##-->;
+
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+@grid-columns:              <!--##=Theme.GridColumns##-->;
+//** Padding between columns. Gets divided in half for the left and right.
+@grid-gutter-width:         <!--##=Theme.GridGutterWidth##-->px;
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+@grid-float-breakpoint:     <!--##=Theme.GridFloatBreakpoint##-->;
+//** Point at which the navbar begins collapsing.
+@grid-float-breakpoint-max: <!--##=Theme.GridFloatBreakpointMax##-->;
+
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+@container-tablet:             <!--##=Theme.ContainerTablet##-->;
+//** For `@screen-sm-min` and up.
+@container-sm:                 <!--##=Theme.ContainerSm##-->;
+
+// Medium screen / desktop
+@container-desktop:            <!--##=Theme.ContainerDesktop##-->;
+//** For `@screen-md-min` and up.
+@container-md:                 <!--##=Theme.ContainerMd##-->;
+
+// Large screen / wide desktop
+@container-large-desktop:      <!--##=Theme.ContainerLargeDesktop##-->;
+//** For `@screen-lg-min` and up.
+@container-lg:                 <!--##=Theme.ContainerLg##-->;
+
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+@navbar-height:                    <!--##=Theme.NavbarHeight##-->px;
+@navbar-margin-bottom:             <!--##=Theme.NavbarMarginBottom##-->;
+@navbar-border-radius:             <!--##=Theme.NavbarBorderRadius##-->;
+@navbar-padding-horizontal:        <!--##=Theme.NavbarPaddingHorizontal##-->;
+@navbar-padding-vertical:          <!--##=Theme.NavbarPaddingVertical##-->;
+@navbar-collapse-max-height:       <!--##=Theme.NavbarCollapseMaxHeight##-->px;
+
+@navbar-default-color:             <!--##=Theme.NavbarDefaultColor##-->;
+@navbar-default-bg:                <!--##=Theme.NavbarDefaultBg##-->;
+@navbar-default-border:            <!--##=Theme.NavbarDefaultBorder##-->;
+
+// Navbar links
+@navbar-default-link-color:		   	<!--##=Theme.NavbarDefaultLinkColor##-->;
+@navbar-default-link-hover-color:	<!--##=Theme.NavbarDefaultLinkHoverColor##-->;
+@navbar-default-link-hover-bg:		<!--##=Theme.NavbarDefaultLinkHoverBg##-->;
+@navbar-default-link-active-color:  <!--##=Theme.NavbarDefaultLinkActiveColor##-->;
+@navbar-default-link-active-bg:     <!--##=Theme.NavbarDefaultLinkActiveBg##-->;
+@navbar-default-link-disabled-color:	<!--##=Theme.NavbarDefaultLinkDisabledColor##-->;
+@navbar-default-link-disabled-bg:       <!--##=Theme.NavbarDefaultLinkDisabledBg##-->;
+
+// Navbar brand label
+@navbar-default-brand-color:               <!--##=Theme.NavbarDefaultBrandColor##-->;
+@navbar-default-brand-hover-color:         <!--##=Theme.NavbarDefaultBrandHoverColor##-->;
+@navbar-default-brand-hover-bg:            <!--##=Theme.NavbarDefaultBrandHoverBg##-->;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           <!--##=Theme.NavbarDefaultToggleHoverBg##-->;
+@navbar-default-toggle-icon-bar-bg:        <!--##=Theme.NavbarDefaultToggleIconBarBg##-->;
+@navbar-default-toggle-border-color:       <!--##=Theme.NavbarDefaultToggleBorderColor##-->;
+
+// Inverted navbar
+// Reset inverted navbar basics
+@navbar-inverse-color:                      <!--##=Theme.NavbarInverseColor##-->;
+@navbar-inverse-bg:                         <!--##=Theme.NavbarInverseBg##-->;
+@navbar-inverse-border:                     <!--##=Theme.NavbarInverseBorder##-->;
+
+// Inverted navbar links
+@navbar-inverse-link-color:                 <!--##=Theme.NavbarInverseLinkColor##-->;
+@navbar-inverse-link-hover-color:           <!--##=Theme.NavbarInverseLinkHoverColor##-->;
+@navbar-inverse-link-hover-bg:              <!--##=Theme.NavbarInverseLinkHoverBg##-->;
+@navbar-inverse-link-active-color:          <!--##=Theme.NavbarInverseLinkActiveColor##-->;
+@navbar-inverse-link-active-bg:             <!--##=Theme.NavbarInverseLinkActiveBg##-->;
+@navbar-inverse-link-disabled-color:        <!--##=Theme.NavbarInverseLinkDisabledColor##-->;
+@navbar-inverse-link-disabled-bg:           <!--##=Theme.NavbarInverseLinkDisabledBg##-->;
+
+// Inverted navbar brand label
+@navbar-inverse-brand-color:                <!--##=Theme.NavbarInverseBrandColor##-->;
+@navbar-inverse-brand-hover-color:          <!--##=Theme.NavbarInverseBrandHoverColor##-->;
+@navbar-inverse-brand-hover-bg:             <!--##=Theme.NavbarInverseBrandHoverBg##-->;
+
+// Inverted navbar toggle
+@navbar-inverse-toggle-hover-bg:            <!--##=Theme.NavbarInverseToggleHoverBg##-->;
+@navbar-inverse-toggle-icon-bar-bg:         <!--##=Theme.NavbarInverseToggleIconBarBg##-->;
+@navbar-inverse-toggle-border-color:        <!--##=Theme.NavbarInverseToggleBorderColor##-->;
+
+
+//== Navs
+//
+//##
+
+//=== Shared nav styles
+@nav-link-padding:                          <!--##=Theme.NavLinkPadding##-->;
+@nav-link-hover-bg:                         <!--##=Theme.NavLinkHoverBg##-->;
+
+@nav-disabled-link-color:                   <!--##=Theme.NavDisabledLinkColor##-->;
+@nav-disabled-link-hover-color:             <!--##=Theme.NavDisabledLinkHoverColor##-->;
+
+//== Tabs
+@nav-tabs-border-color:                     <!--##=Theme.NavTabsBorderColor##-->;
+
+@nav-tabs-link-hover-border-color:          <!--##=Theme.NavTabsLinkHoverBorderColor##-->;
+
+@nav-tabs-active-link-hover-bg:             <!--##=Theme.NavTabsActiveLinkHoverBg##-->;
+@nav-tabs-active-link-hover-color:          <!--##=Theme.NavTabsActiveLinkHoverColor##-->;
+@nav-tabs-active-link-hover-border-color:   <!--##=Theme.NavTabsActiveLinkHoverBorderColor##-->;
+
+@nav-tabs-justified-link-border-color:            <!--##=Theme.NavTabsJustifiedLinkBorderColor##-->;
+@nav-tabs-justified-active-link-border-color:     <!--##=Theme.NavTabsJustifiedActiveLinkBorderColor##-->;
+
+//== Pills
+@nav-pills-border-radius:                   <!--##=Theme.NavPillsBorderRadius##-->;
+@nav-pills-active-link-hover-bg:            <!--##=Theme.NavPillsActiveLinkHoverBg##-->;
+@nav-pills-active-link-hover-color:         <!--##=Theme.NavPillsActiveLinkHoverColor##-->;
+
+
+//== Pagination
+//
+//##
+
+@pagination-color:                     <!--##=Theme.PaginationColor##-->;
+@pagination-bg:                        <!--##=Theme.PaginationBg##-->;
+@pagination-border:                    <!--##=Theme.PaginationBorder##-->;
+
+@pagination-hover-color:               <!--##=Theme.PaginationHoverColor##-->;
+@pagination-hover-bg:                  <!--##=Theme.PaginationHoverBg##-->;
+@pagination-hover-border:              <!--##=Theme.PaginationHoverBorder##-->;
+
+@pagination-active-color:              <!--##=Theme.PaginationActiveColor##-->;
+@pagination-active-bg:                 <!--##=Theme.PaginationActiveBg##-->;
+@pagination-active-border:             <!--##=Theme.PaginationActiveBorder##-->;
+
+@pagination-disabled-color:            <!--##=Theme.PaginationDisabledColor##-->;
+@pagination-disabled-bg:               <!--##=Theme.PaginationDisabledBg##-->;
+@pagination-disabled-border:           <!--##=Theme.PaginationDisabledBorder##-->;
+
+
+//== Pager
+//
+//##
+
+@pager-bg:                             <!--##=Theme.PagerBg##-->;
+@pager-border:                         <!--##=Theme.PagerBorder##-->;
+@pager-border-radius:                  <!--##=Theme.PagerBorderRadius##-->px;
+
+@pager-hover-bg:                       <!--##=Theme.PagerHoverBg##-->;
+
+@pager-active-bg:                      <!--##=Theme.PagerActiveBg##-->;
+@pager-active-color:                   <!--##=Theme.PagerActiveColor##-->;
+
+@pager-disabled-color:                 <!--##=Theme.PagerDisabledColor##-->;
+
+
+//== Jumbotron
+//
+//##
+
+@jumbotron-padding:              <!--##=Theme.JumbotronPadding##-->px;
+@jumbotron-color:                <!--##=Theme.JumbotronColor##-->;
+@jumbotron-bg:                   <!--##=Theme.JumbotronBg##-->;
+@jumbotron-heading-color:        <!--##=Theme.JumbotronHeadingColor##-->;
+@jumbotron-font-size:            <!--##=Theme.JumbotronFontSize##-->;
+@jumbotron-heading-font-size:    ceil((@font-size-base * 4.5));
+
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+@state-success-text:             <!--##=Theme.SuccessText##-->;
+@state-success-bg:               <!--##=Theme.SuccessBg##-->;
+@state-success-border:           <!--##=Theme.SuccessBorder##-->;
+
+@state-info-text:                <!--##=Theme.InfoText##-->;
+@state-info-bg:                  <!--##=Theme.InfoBg##-->;
+@state-info-border:              <!--##=Theme.InfoBorder##-->;
+
+@state-warning-text:             <!--##=Theme.WarningText##-->;
+@state-warning-bg:               <!--##=Theme.WarningBg##-->;
+@state-warning-border:           <!--##=Theme.WarningBorder##-->;
+
+@state-danger-text:              <!--##=Theme.ErrorText##-->;
+@state-danger-bg:                <!--##=Theme.ErrorBg##-->;
+@state-danger-border:            <!--##=Theme.ErrorBorder##-->;
+
+
+//== Tooltips
+//
+//##
+
+//** Tooltip max width
+@tooltip-max-width:           <!--##=Theme.TooltipMaxWidth##-->px;
+//** Tooltip text color
+@tooltip-color:               <!--##=Theme.TooltipColor##-->;
+//** Tooltip background color
+@tooltip-bg:                  <!--##=Theme.TooltipBg##-->;
+@tooltip-opacity:             <!--##=Theme.TooltipOpacity##-->;
+
+//** Tooltip arrow width
+@tooltip-arrow-width:         <!--##=Theme.TooltipArrowWidth##-->px;
+//** Tooltip arrow color
+@tooltip-arrow-color:         <!--##=Theme.TooltipArrowColor##-->;
+
+
+//== Popovers
+//
+//##
+
+//** Popover body background color
+@popover-bg:                          <!--##=Theme.PopoverBg##-->;
+//** Popover maximum width
+@popover-max-width:                   <!--##=Theme.PopoverMaxWidth##-->px;
+//** Popover border color
+@popover-border-color:                <!--##=Theme.PopoverBorderColor##-->;
+//** Popover fallback border color
+@popover-fallback-border-color:       <!--##=Theme.PopoverFallbackBorderColor##-->;
+
+//** Popover title background color
+@popover-title-bg:                    <!--##=Theme.PopoverTitleBg##-->;
+
+//** Popover arrow width
+@popover-arrow-width:                 <!--##=Theme.PopoverArrowWidth##-->px;
+//** Popover arrow color
+@popover-arrow-color:                 <!--##=Theme.PopoverArrowColor##-->;
+
+//** Popover outer arrow width
+@popover-arrow-outer-width:           <!--##=Theme.PopoverArrowOuterWidth##-->;
+//** Popover outer arrow color
+@popover-arrow-outer-color:           <!--##=Theme.PopoverArrowOuterColor##-->;
+//** Popover outer arrow fallback color
+@popover-arrow-outer-fallback-color:  <!--##=Theme.PopoverArrowOuterFallbackColor##-->;
+
+
+//== Labels
+//
+//##
+
+//** Default label background color
+@label-default-bg:            <!--##=Theme.LabelDefaultBg##-->;
+//** Primary label background color
+@label-primary-bg:            <!--##=Theme.LabelPrimaryBg##-->;
+//** Success label background color
+@label-success-bg:            <!--##=Theme.LabelSuccessBg##-->;
+//** Info label background color
+@label-info-bg:               <!--##=Theme.LabelInfoBg##-->;
+//** Warning label background color
+@label-warning-bg:            <!--##=Theme.LabelWarningBg##-->;
+//** Danger label background color
+@label-danger-bg:             <!--##=Theme.LabelDangerBg##-->;
+
+//** Default label text color
+@label-color:                 <!--##=Theme.LabelColor##-->;
+//** Default text color of a linked label
+@label-link-hover-color:      <!--##=Theme.LabelLinkHoverColor##-->;
+
+
+//== Modals
+//
+//##
+
+//** Padding applied to the modal body
+@modal-inner-padding:         <!--##=Theme.ModalInnerPadding##-->px;
+
+//** Padding applied to the modal title
+@modal-title-padding:         <!--##=Theme.ModalTitlePadding##-->px;
+//** Modal title line-height
+@modal-title-line-height:     <!--##=Theme.ModalTitleLineHeight##-->;
+
+//** Background color of modal content area
+@modal-content-bg:                             <!--##=Theme.ModalContentBg##-->;
+//** Modal content border color
+@modal-content-border-color:                   <!--##=Theme.ModalContentBorderColor##-->;
+//** Modal content border color **for IE8**
+@modal-content-fallback-border-color:          <!--##=Theme.ModalContentFallbackBorderColor##-->;
+
+//** Modal backdrop background color
+@modal-backdrop-bg:           <!--##=Theme.ModalBackdropBg##-->;
+//** Modal backdrop opacity
+@modal-backdrop-opacity:      <!--##=Theme.ModalBackdropOpacity##-->;
+//** Modal header border color
+@modal-header-border-color:   <!--##=Theme.ModalHeaderBorderColor##-->;
+//** Modal footer border color
+@modal-footer-border-color:   <!--##=Theme.ModalFooterBorderColor##-->;
+
+@modal-lg:                    <!--##=Theme.ModalLg##-->px;
+@modal-md:                    <!--##=Theme.ModalMd##-->px;
+@modal-sm:                    <!--##=Theme.ModalSm##-->px;
+
+
+//== Alerts
+//
+//## Define alert colors, border radius, and padding.
+
+@alert-padding:               <!--##=Theme.AlertPadding##-->px;
+@alert-border-radius:         <!--##=Theme.AlertBorderRadius##-->;
+@alert-link-font-weight:      <!--##=Theme.AlertLinkFontWeight##-->;
+
+@alert-success-bg:            <!--##=Theme.AlertSuccessBg##-->;
+@alert-success-text:          <!--##=Theme.AlertSuccessText##-->;
+@alert-success-border:        <!--##=Theme.AlertSuccessBorder##-->;
+
+@alert-info-bg:               <!--##=Theme.AlertInfoBg##-->;
+@alert-info-text:             <!--##=Theme.AlertInfoText##-->;
+@alert-info-border:           <!--##=Theme.AlertInfoBorder##-->;
+
+@alert-warning-bg:            <!--##=Theme.AlertWarningBg##-->;
+@alert-warning-text:          <!--##=Theme.AlertWarningText##-->;
+@alert-warning-border:        <!--##=Theme.AlertWarningBorder##-->;
+
+@alert-danger-bg:             <!--##=Theme.AlertDangerBg##-->;
+@alert-danger-text:           <!--##=Theme.AlertDangerText##-->;
+@alert-danger-border:         <!--##=Theme.AlertDangerBorder##-->;
+
+
+//== Progress bars
+//
+//##
+
+//** Background color of the whole progress component
+@progress-bg:                 <!--##=Theme.ProgressBg##-->;
+//** Progress bar text color
+@progress-bar-color:          <!--##=Theme.ProgressBarColor##-->;
+//** Variable for setting rounded corners on progress bar.
+@progress-border-radius:      @border-radius-base;
+
+//** Default progress bar color
+@progress-bar-bg:             <!--##=Theme.ProgressBarBg##-->;
+//** Success progress bar color
+@progress-bar-success-bg:     <!--##=Theme.ProgressBarSuccessBg##-->;
+//** Warning progress bar color
+@progress-bar-warning-bg:     <!--##=Theme.ProgressBarWarningBg##-->;
+//** Danger progress bar color
+@progress-bar-danger-bg:      <!--##=Theme.ProgressBarDangerBg##-->;
+//** Info progress bar color
+@progress-bar-info-bg:        <!--##=Theme.ProgressBarInfoBg##-->;
+
+
+//== List group
+//
+//##
+
+//** Background color on `.list-group-item`
+@list-group-bg:                 <!--##=Theme.ListgroupBg##-->;
+//** `.list-group-item` border color
+@list-group-border:             <!--##=Theme.ListgroupBorder##-->;
+//** List group border radius
+@list-group-border-radius:      <!--##=Theme.ListgroupBorderRadius##-->;
+
+//** Background color of single list items on hover
+@list-group-hover-bg:           <!--##=Theme.ListgroupHoverBg##-->;
+//** Text color of active list items
+@list-group-active-color:       <!--##=Theme.ListgroupActiveColor##-->;
+//** Background color of active list items
+@list-group-active-bg:          <!--##=Theme.ListgroupActiveBg##-->;
+//** Border color of active list items
+@list-group-active-border:      <!--##=Theme.ListgroupActiveBorder##-->;
+//** Text color for content within active list items
+@list-group-active-text-color:  <!--##=Theme.ListgroupActiveTextColor##-->;
+
+//** Text color of disabled list items
+@list-group-disabled-color:      <!--##=Theme.ListgroupDisabledColor##-->;
+//** Background color of disabled list items
+@list-group-disabled-bg:         <!--##=Theme.ListgroupDisabledBg##-->;
+//** Text color for content within disabled list items
+@list-group-disabled-text-color: <!--##=Theme.ListgroupDisabledTextColor##-->;
+
+@list-group-link-color:         <!--##=Theme.ListgroupLinkColor##-->;
+@list-group-link-hover-color:   <!--##=Theme.ListgroupLinkHoverColor##-->;
+@list-group-link-heading-color: <!--##=Theme.ListgroupLinkHeadingColor##-->;
+
+
+//== Panels
+//
+//##
+
+@panel-bg:                    <!--##=Theme.PanelBg##-->;
+@panel-body-padding:          <!--##=Theme.PanelBodyPadding##-->px;
+@panel-heading-padding:       <!--##=Theme.PanelHeadingPadding##-->;
+@panel-footer-padding:        <!--##=Theme.PanelFooterPadding##-->;
+@panel-border-radius:         <!--##=Theme.PanelBorderRadius##-->;
+
+//** Border color for elements within panels
+@panel-inner-border:          <!--##=Theme.PanelInnerBorder##-->;
+@panel-footer-bg:             <!--##=Theme.PanelFooterBg##-->;
+
+@panel-default-text:          <!--##=Theme.PanelDefaultText##-->;
+@panel-default-border:        <!--##=Theme.PanelDefaultBorder##-->;
+@panel-default-heading-bg:    <!--##=Theme.PanelDefaultHeadingBg##-->;
+
+@panel-primary-text:          <!--##=Theme.PanelPrimaryText##-->;
+@panel-primary-border:        <!--##=Theme.PanelPrimaryBorder##-->;
+@panel-primary-heading-bg:    <!--##=Theme.PanelPrimaryHeadingBg##-->;
+
+@panel-success-text:          <!--##=Theme.PanelSuccessText##-->;
+@panel-success-border:        <!--##=Theme.PanelSuccessBorder##-->;
+@panel-success-heading-bg:    <!--##=Theme.PanelSuccessHeadingBg##-->;
+
+@panel-info-text:             <!--##=Theme.PanelInfoText##-->;
+@panel-info-border:           <!--##=Theme.PanelInfoBorder##-->;
+@panel-info-heading-bg:       <!--##=Theme.PanelInfoHeadingBg##-->;
+
+@panel-warning-text:          <!--##=Theme.PanelWarningText##-->;
+@panel-warning-border:        <!--##=Theme.PanelWarningBorder##-->;
+@panel-warning-heading-bg:    <!--##=Theme.PanelWarningHeadingBg##-->;
+
+@panel-danger-text:           <!--##=Theme.PanelDangerText##-->;
+@panel-danger-border:         <!--##=Theme.PanelDangerBorder##-->;
+@panel-danger-heading-bg:     <!--##=Theme.PanelDangerHeadingBg##-->;
+
+
+//== Thumbnails
+//
+//##
+
+//** Padding around the thumbnail image
+@thumbnail-padding:           <!--##=Theme.ThumbnailPadding##-->px;
+//** Thumbnail background color
+@thumbnail-bg:                <!--##=Theme.ThumbnailBg##-->;
+//** Thumbnail border color
+@thumbnail-border:            <!--##=Theme.ThumbnailBorder##-->;
+//** Thumbnail border radius
+@thumbnail-border-radius:     <!--##=Theme.ThumbnailBorderRadius##-->;
+
+//** Custom text color for thumbnail captions
+@thumbnail-caption-color:     <!--##=Theme.ThumbnailCaptionColor##-->;
+//** Padding around the thumbnail caption
+@thumbnail-caption-padding:   <!--##=Theme.ThumbnailCaptionPadding##-->px;
+
+
+//== Wells
+//
+//##
+
+@well-bg:                     <!--##=Theme.WellBg##-->;
+@well-border:                 <!--##=Theme.WellBorder##-->;
+
+
+//== Badges
+//
+//##
+
+@badge-color:                 <!--##=Theme.BadgeColor##-->;
+//** Linked badge text color on hover
+@badge-link-hover-color:      <!--##=Theme.BadgeLinkHoverColor##-->;
+@badge-bg:                    <!--##=Theme.BadgeBg##-->;
+
+//** Badge text color in active nav link
+@badge-active-color:          <!--##=Theme.BadgeActiveColor##-->;
+//** Badge background color in active nav link
+@badge-active-bg:             <!--##=Theme.BadgeActiveBg##-->;
+
+@badge-font-weight:           <!--##=Theme.BadgeFontWeight##-->;
+@badge-line-height:           1;
+@badge-border-radius:         <!--##=Theme.BadgeBorderRadius##-->px;
+
+
+//== Breadcrumbs
+//
+//##
+
+@breadcrumb-padding-vertical:   <!--##=Theme.BreadcrumbPaddingVertical##-->px;
+@breadcrumb-padding-horizontal: <!--##=Theme.BreadcrumbPaddingHorizontal##-->px;
+//** Breadcrumb background color
+@breadcrumb-bg:                 <!--##=Theme.BreadcrumbBg##-->;
+//** Breadcrumb text color
+@breadcrumb-color:              <!--##=Theme.BreadcrumbColor##-->;
+//** Text color of current page in the breadcrumb
+@breadcrumb-active-color:       <!--##=Theme.BreadcrumbActiveColor##-->;
+//** Textual separator for between breadcrumb elements
+@breadcrumb-separator:          "<!--##=Theme.BreadcrumbSeparator##-->";
+
+
+//== Carousel
+//
+//##
+
+@carousel-text-shadow:                        <!--##=Theme.CarouselTextShadow##-->;
+
+@carousel-control-color:                      <!--##=Theme.CarouselControlColor##-->;
+@carousel-control-width:                      <!--##=Theme.CarouselControlWidth##-->;
+@carousel-control-opacity:                    <!--##=Theme.CarouselControlOpacity##-->;
+@carousel-control-font-size:                  <!--##=Theme.CarouselControlFontSize##-->px;
+
+@carousel-indicator-active-bg:                <!--##=Theme.CarouselIndicatorActiveBg##-->;
+@carousel-indicator-border-color:             <!--##=Theme.CarouselIndicatorBorderColor##-->;
+
+@carousel-caption-color:                      <!--##=Theme.CarouselCaptionColor##-->;
+
+
+//== Close
+//
+//##
+
+@close-font-weight:           <!--##=Theme.CloseFontWeight##-->;
+@close-color:                 <!--##=Theme.CloseColor##-->;
+@close-text-shadow:           <!--##=Theme.CloseTextShadow##-->;
+
+
+//== Code
+//
+//##
+
+@code-color:                  <!--##=Theme.CodeColor##-->;
+@code-bg:                     <!--##=Theme.CodeBg##-->;
+
+@kbd-color:                   <!--##=Theme.KbdColor##-->;
+@kbd-bg:                      <!--##=Theme.KbdBg##-->;
+
+@pre-bg:                      <!--##=Theme.PreBg##-->;
+@pre-color:                   <!--##=Theme.PreColor##-->;
+@pre-border-color:            <!--##=Theme.PreBorderColor##-->;
+@pre-scrollable-max-height:   <!--##=Theme.PreScrollableMaxHeight##-->px;
+
+
+//== Type
+//
+//##
+
+//** Horizontal offset for forms and lists.
+@component-offset-horizontal: <!--##=Theme.ComponentOffsetHorizontal##-->px;
+//** Text muted color
+@text-muted:                  <!--##=Theme.TextMuted##-->;
+//** Abbreviations and acronyms border color
+@abbr-border-color:           <!--##=Theme.AbbrBorderColor##-->;
+//** Headings small color
+@headings-small-color:        <!--##=Theme.HeadingsSmallColor##-->;
+//** Blockquote small color
+@blockquote-small-color:      <!--##=Theme.BlockquoteSmallColor##-->;
+//** Blockquote font size
+@blockquote-font-size:        <!--##=Theme.BlockquoteFontSize##-->;
+//** Blockquote border color
+@blockquote-border-color:     <!--##=Theme.BlockquoteBorderColor##-->;
+//** Page header border color
+@page-header-border-color:    <!--##=Theme.PageHeaderBorderColor##-->;
+//** Width of horizontal description list titles
+@dl-horizontal-offset:        <!--##=Theme.DlHorizontalOffset##-->;
+//** Point at which .dl-horizontal becomes horizontal
+@dl-horizontal-breakpoint:    @grid-float-breakpoint;
+//** Horizontal line color.
+@hr-border:                   <!--##=Theme.HrBorder##-->;
+/*
+
+ IMPORTANT NOTES: (PLEASE READ CAREFULLY!)
+ 
+ 1. DO NOT MODIFY the system styles section, it is generated by the system,
+    your modifications will be overwritten. If you want to change the stylesheet
+ 	 template, modify the ew.less in the "themes" subfolder under the installed
+ 	 directory. Only modify the ew.less if you have the necessary knowledges in
+ 	 CSS.
+ 	 
+ 2. DO NOT REMOVE THE FOLLOWING COMMENTS:
+    
+    BEGIN_USER_STYLES
+    END_USER_STYLES
+ 	 
+ 	 You MUST write your styles between these two comment lines below, styles
+    outside this user styles section will be discarded.
+ 	 
+ 3. If you want to override the system styles, you can copy the styles to the
+    User Styles Section, or you can use a separate user stylesheet.
+
+*/
+
+<!--##
+
+function px(name, value) {
+	return  value + "px";
+}
+
+var vars = [
+	"ThemeSiteHeaderBackColor",
+	"ThemeSiteHeaderTextColor",
+	"ThemeSiteLeftBackColor",
+	"ThemeSiteLeftTextColor",
+	"ThemeSiteFooterBackColor",
+	"ThemeSiteFooterTextColor",
+	"ThemeSiteBodyBackColor",
+	"ThemeSiteBodyTextColor",
+	"ThemeSiteLinkColor",
+	"ThemeSiteVisitedLinkColor",
+	"ThemeSiteActiveLinkColor",
+	"ThemeTableHeaderBackColor",
+	"ThemeTableHeaderBorderColor",
+	"ThemeTableHeaderTextColor",
+	"ThemeTableBodyRowColor",
+	"ThemeTableBodyRowTextColor",
+	"ThemeTableBodyAlternatingRowColor",
+	"ThemeTableBodyAlternatingRowTextColor",
+	"ThemeTableBodyEditRowColor",
+	"ThemeTableBodyEditRowTextColor",
+	"ThemeTableBodyHighlightRowColor",
+	"ThemeTableBodyHighlightRowTextColor",
+	"ThemeTableBodySelectRowColor",
+	"ThemeTableBodySelectRowTextColor",
+	"ThemeTableFooterBackColor",
+	"ThemeTableFooterTextColor",
+	["ThemeGridPadding", px],
+	["ThemeGridBorderWidth", px],
+	"ThemeGridBorderColor",
+	["ThemeGridLineWidth", px],
+	"ThemeGridLineColor",
+	"ThemeGridPagerPanelBackColor",
+	"ThemeGridPagerPanelTextColor"
+];
+
+var Theme = {};
+for (var i in vars) {
+	if (typeof vars[i][0] == "string" && typeof vars[i][1] == "function") {
+		Theme[vars[i][0].replace(/^Theme/, "")] = vars[i][1](vars[i][0], PROJ.GetV(vars[i][0]));
+	} else if (vars[i].indexOf("Color") > -1) { // Color
+		Theme[vars[i].replace(/^Theme/, "")] = (PROJ.GetV(vars[i]) || "inherit");
+	} else {
+		Theme[vars[i].replace(/^Theme/, "")] = PROJ.GetV(vars[i]);
+	}
+}
+##-->
+
+/*BEGIN_SYSTEM_STYLES*/
+
+@import "mixins.less";
+
+<!--## for (var i in Theme) { ##-->
+@Theme<!--##=i##-->: <!--##=Theme[i]##-->;
+<!--## } ##-->
+@ThemeTableHeaderGradient: true; // Set to false to disable table header gradient
+
+@font-face {
+	font-family: 'ew';
+	src:url('fonts/ew.eot?t39no9');
+	src:url('fonts/ew.eot?#iefixt39no9') format('embedded-opentype'),
+		url('fonts/ew.woff?t39no9') format('woff'),
+		url('fonts/ew.ttf?t39no9') format('truetype'),
+		url('fonts/ew.svg?t39no9#ew') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'ew';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-advanced-search:before {
+	content: "\e608";
+}
+.icon-grid-add:before {
+	content: "\e60f";
+}
+.icon-grid-edit:before {
+	content: "\e61c";
+}
+.icon-addedit:before {
+	content: "\e609";
+}
+.icon-md-add:before {
+	content: "\e61b";
+}
+.icon-md-edit:before {
+	content: "\e600";
+}
+.icon-md-copy:before {
+	content: "\e60c";
+}
+.icon-md-view:before {
+	content: "\e614";
+}
+.icon-inline-add:before {
+	content: "\e619";
+}
+.icon-inline-copy:before {
+	content: "\e606";
+}
+.icon-inline-copy2:before {
+	content: "\e61a";
+}
+.icon-inline-edit:before {
+	content: "\e605";
+}
+.icon-reset-search:before {
+	content: "\e60d";
+}
+.icon-view:before {
+	content: "\e612";
+}
+.icon-advanced-search2:before {
+	content: "\e60b";
+}
+.icon-highlight:before {
+	content: "\e60a";
+}
+.icon-csv:before {
+	content: "\e610";
+}
+.icon-xml:before {
+	content: "\e60e";
+}
+.icon-email:before {
+	content: "\f003";
+}
+.icon-user:before {
+	content: "\f007";
+}
+.icon-print:before {
+	content: "\f02f";
+}
+.icon-edit:before {
+	content: "\f040";
+}
+.icon-export:before {
+	content: "\f045";
+}
+.icon-selected:before {
+	content: "\f046";
+}
+.icon-filter:before {
+	content: "\f0b0";
+}
+.icon-copy:before {
+	content: "\f0c5";
+}
+.icon-options:before {
+	content: "\f0c9";
+}
+.icon-table:before {
+	content: "\f0ce";
+}
+.icon-first:before {
+	content: "\f100";
+}
+.icon-last:before {
+	content: "\f101";
+}
+.icon-prev:before {
+	content: "\f104";
+}
+.icon-next:before {
+	content: "\f105";
+}
+.icon-collapse:before {
+	content: "\f147";
+}
+.icon-expand:before {
+	content: "\f196";
+}
+.icon-search:before {
+	content: "\e611";
+}
+.icon-language:before {
+	content: "\e613";
+}
+.icon-pdf:before {
+	content: "\e601";
+}
+.icon-word:before {
+	content: "\e602";
+}
+.icon-excel:before {
+	content: "\e603";
+}
+.icon-html:before {
+	content: "\e604";
+}
+.icon-master-detail:before {
+	content: "\e607";
+}
+.icon-arrow-left:before {
+	content: "\e615";
+}
+.icon-arrow-down:before {
+	content: "\e616";
+}
+.icon-arrow-up:before {
+	content: "\e617";
+}
+.icon-arrow-right:before {
+	content: "\e618";
+}
+
+/* Example: Old icons
+.icon-edit {
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    background:url(../phpimages/edit.gif);
+}
+.icon-edit:before {
+  content: "";
+}
+.icon-view {
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    background:url(../phpimages/view.gif);
+}
+.icon-view:before {
+  content: "";
+}
+.icon-copy {
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    background:url(../phpimages/copy.gif);
+}
+.icon-copy:before {
+  content: "";
+}
+.glyphicon-trash {
+    background-position: 0 0;
+    width: 16px;
+    height: 16px;
+    background:url(../phpimages/delete.gif);
+}
+.glyphicon-trash:before {
+    content: "";
+}
+*** */
+
+a:not(.btn) {
+
+	.icon-view,
+	.icon-edit,
+	.icon-inline-edit,
+	.icon-copy,
+	.icon-inline-copy,
+	.glyphicon-trash {
+		display: inline-block;
+	}
+	
+	&.ewEdit + &.ewInlineEdit,
+	&.ewCopy + &.ewInlineCopy {
+		padding-left: 4px;
+	}
+
+}
+
+/* google map */
+.gm-style-iw {
+	color: <!--##=Theme.TextColor##-->;
+}
+
+#ewGoogleMap {
+	margin-bottom: @line-height-computed;
+}
+
+// template layout
+.ewHeaderRow {
+	background-color: @ThemeSiteHeaderBackColor; // background color
+	color: @ThemeSiteHeaderTextColor; // font color
+}
+
+.ewSiteTitle {
+	margin-bottom: @line-height-computed;
+}
+
+.ewContentTable {
+	width: 100%;
+	border-spacing: 0;
+}
+
+.ewMenuColumn {
+	background-color: @ThemeSiteLeftBackColor; // background color
+	color: @ThemeSiteLeftTextColor; // font color
+	width: 180px;
+	vertical-align: top;
+	padding: 0;
+}
+
+.ewContentColumn {
+	background-color: @ThemeSiteBodyBackColor; // background color
+	padding: @line-height-computed;
+	vertical-align: top;
+}
+
+#ewMenuRow .navbar {
+	margin-bottom: 0;
+}
+
+/* Mobile menu */
+#ewMobileMenu {
+	margin-bottom: 0;
+	border-radius: 0;
+
+	.navbar-nav > .active > a {
+		background-image: none;
+		box-shadow: none;
+	}
+
+	.dropdown-menu {
+		padding: 0;
+	}
+	
+	.dropdown-menu > li > a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	
+	.dropdown-menu > .active > a,
+	.dropdown-menu > .active > a:hover,
+	.dropdown-menu > .active > a:focus {
+		background-image: none;
+	}
+	
+	.ewMenuLink {
+		position: absolute;
+		right: 0;
+	}
+	
+	.ewMenuLink + .ewDropdown {
+		margin-right: (@font-size-base + 30px);
+	}
+	
+	.ewDropdown .icon-arrow-down {
+		margin-left: 5px;
+	}
+    
+	.open > .ewDropdown > .icon-arrow-down:before {
+		content: "\e617";
+	}
+
+	.open > a,
+	.open > a:hover,
+	.open > a:focus {
+		background-color: inherit;
+	}
+
+}
+
+.ewFooterRow {
+	background-color: @ThemeSiteFooterBackColor; // background color
+	color: @ThemeSiteFooterTextColor; // footer font color
+}
+
+.ewFooterText {
+	padding: 4px;
+}
+
+#RootMenu {
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	background-color: @ThemeSiteLeftBackColor;
+	display: block;
+	position: relative;
+	float: none;
+	margin-top: 0;
+}
+
+@ew-icon-size: 16px;
+
+.ewIcon {
+	font-size: max(@font-size-base, @ew-icon-size); // min 16px
+	text-shadow: none;
+	display: block;
+}
+
+.ewImage {
+	margin: 1px;
+}
+
+.dropdown-toggle .ewIcon, .dropdown-menu .ewIcon {
+	float: left !important;
+}
+
+.breadcrumb {
+	display: inline-block;
+}
+
+.ewToolbar {
+
+	.breadcrumb {
+		vertical-align: middle;
+		padding-top: (@padding-base-vertical + 1);
+		padding-bottom: (@padding-base-vertical + 1);
+		margin-right: 10px;
+	}
+    
+	.ewExportOption, .ewSearchOption, .ewActionOption, .ewDetailOption, .ewFilterOption, .ewLanguageOption { /* v12 */
+		display: inline-block;
+		vertical-align: middle;
+		margin-bottom: @line-height-computed;
+	}
+	
+	.ewLanguageOption {
+		float: right;
+	}
+
+}
+
+.ewQuickSearch .input-group-btn .btn {
+	max-height: @input-height-base;
+	min-height: @input-height-base;
+}
+
+.ewDesktop { /* v12 */
+	display: table;
+
+	.ewDesktopButton {
+		text-align: center;
+		margin-bottom: @line-height-computed;
+	}
+	
+	.ewDesktopTable {
+		min-width: 300px;
+		
+		> tbody > tr {
+			> td:first-of-type { // caption
+				text-align: right;
+				> span[id^=elh_] {
+					font-weight: bold;
+					display: inline-block;
+					margin-top: @padding-base-vertical;
+				}
+				&.ewCheckbox input[type=checkbox] { // checkbox (update page)
+					margin-top: @padding-base-vertical;
+				}
+			}
+			> td:nth-of-type(2):not(:last-of-type) {
+				.ewSearchOperator { // search operator (search page)
+					margin-top: @padding-base-vertical;
+				}
+				> span[id^=elh_] { // caption (update page)
+					font-weight: bold;
+					display: block;
+					text-align: right;					
+					margin-top: @padding-base-vertical;
+				}
+			}
+			> td:last-of-type { // input
+				min-width: 150px;
+				.form-control-static {
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+
+}
+
+.ewGrid {
+	padding: 0;
+	border: @ThemeGridBorderWidth solid @ThemeGridBorderColor;
+	margin-bottom: @line-height-computed;
+	display: table;
+	
+	.ewGridContent {
+		padding: 0;
+		border: @ThemeGridBorderWidth solid @ThemeGridBorderColor; // grid border
+	}
+
+	.ewGridUpperPanel {
+		border-bottom: @ThemeGridLineWidth solid @ThemeTableHeaderBorderColor;
+	}
+    
+	.ewTable, .ewGridMiddlePanel {
+		border: 0;
+		margin-bottom: 0;
+		overflow-x: visible;
+	}
+    
+	.ewGridLowerPanel {
+		border-top: @ThemeGridLineWidth solid @ThemeGridLineColor;
+	}
+}
+
+@ew-padding-xs-vertical: 3px;
+@ew-height-xs: (max(floor(@font-size-small * @line-height-small), @ew-icon-size) + @ew-padding-xs-vertical * 2 + 2); 
+
+.form-horizontal .ewTable .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.ewStdTable {
+	border: 0;
+	border-spacing: 0;
+}
+
+.ewStdTable > tbody > tr > td {
+	padding: 0;
+}
+
+.ewSearchPanel {
+	margin-bottom: @line-height-computed;
+}
+
+.ewSearchPanel .panel-body {
+	padding: 0;
+}
+
+// pager
+.ewPager {
+	float: left;
+	padding-right: 20px;
+	margin-bottom: @line-height-computed;
+
+	span:not(.glyphicon):not([class^=icon-]) {
+		float: left;
+		padding-top: (@ew-padding-xs-vertical + 1);
+		padding-bottom: (@ew-padding-xs-vertical + 1);
+		
+	}
+
+	&.ewRec span {
+		padding-top: (@ew-padding-xs-vertical + 1);
+		padding-bottom: (@ew-padding-xs-vertical + 1);
+	}
+
+	.input-group > input.form-control[name=pageno] {
+		width: 6em;
+	}	
+
+	.ewPrevNext, .ewNumericPage {
+		float: left;
+	}
+
+	.ewPrevNext .input-group-btn:first-child > .btn + .btn { // override Bootstrap
+		margin-left: 0;
+	}
+
+	.pagination {
+		display: block;
+		margin: 0;
+	}
+	
+	.pagination > li > a, .pagination > li > span {
+		padding-top: @ew-padding-xs-vertical;
+		padding-bottom: @ew-padding-xs-vertical;
+	}
+	
+}
+
+.ewListOtherOptions {
+	margin-bottom: 2px;
+	float: left;	
+}
+
+input[name=pageno] {
+	height: (max(floor(@font-size-small * @line-height-small), @ew-icon-size) + @padding-small-vertical * 2 + 2);
+}
+
+// grid pager panel
+.ewGridUpperPanel.panel-heading, .ewGridLowerPanel.panel-footer {
+	padding: @ThemeGridPadding;	
+	border-left: 0;
+	border-right: 0;	
+	background-image: none;
+	color: @ThemeGridPagerPanelTextColor; // grid header font color	
+
+	input, select, .btn-sm {
+		padding-top: @ew-padding-xs-vertical;
+		padding-bottom: @ew-padding-xs-vertical;
+		height: @ew-height-xs;
+	}
+	
+	select {
+		line-height: @ew-height-xs;
+	}
+
+	.ewPager {
+		margin-bottom: 2px;
+	}
+}
+
+.ewGridUpperPanel.panel-heading when (iscolor(@ThemeGridPagerPanelBackColor)) {
+	background-color: @ThemeGridPagerPanelBackColor; // grid header color	
+}
+
+.ewGridLowerPanel.panel-footer when (iscolor(@ThemeGridPagerPanelBackColor)) {
+	background-color: @ThemeGridPagerPanelBackColor; // grid header color	
+}
+
+button.ewButton {
+	min-width: 75px;
+}
+
+a.ewButton {
+	min-width: 49px;
+}
+
+.ewButtonDropdown {
+	min-width: (@padding-small-horizontal * 2 + @ew-icon-size + @caret-width-base * 2 + 2px);
+}
+
+// Dropdown selection list
+.ewDropdownList {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: default;
+	height: @input-height-base;
+	
+	&.open .dropdown-toggle {
+		@color-rgba: rgba(red(@input-border-focus), green(@input-border-focus), blue(@input-border-focus), .6);
+		border-color: @input-border-focus;
+		outline: 0;
+		.box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
+  	}
+	
+	.dropdown-toggle {  		
+		padding-right: (@input-height-base * 2);
+		display: block;
+	}
+	
+	.form-control-feedback {
+		width: (@input-height-base * 0.8);
+	}	
+
+	.ewDropdownListClear {
+		right: (@input-height-base * 0.8) !important;
+		width: 1em;
+		display: none;
+		pointer-events: auto;
+		color: @close-color;
+		text-shadow: @close-text-shadow;
+		.opacity(.2);
+		
+		&:hover, &:focus {	
+			cursor: pointer;
+			.opacity(.5);
+		}
+		
+		~.form-control-feedback {
+			right: 0;
+		}
+	}
+}
+
+.ewTabContent {
+	padding: 0;
+	border: 0;
+}
+
+.ewPointer {
+	cursor: pointer;
+}
+
+.ewAggregate:after {
+	content: ": ";
+}
+
+.ewTableHeader .ewTableHeaderBtn {
+	position: relative;
+	padding-right: 12px;
+	white-space: nowrap;
+
+	.ewTableHeaderSort {
+		position: absolute;
+		width: 10px;
+		top: 50%;
+		margin-top: -9px;
+		right: 0;
+		float: right;
+	}
+    
+    .caret {
+        margin-left: 0;
+        border-top: @caret-width-base solid;
+    }
+    
+    .ewSortUp {
+        border-top: 0;
+        content: "";
+        border-bottom: @caret-width-base solid;
+    }
+}
+
+// main table
+.ewGrid .ewTable {
+	border: 0;
+	border-spacing: 0;
+	border-collapse: separate;
+	empty-cells: show;
+	width: 100%;
+
+	> tbody > tr > td, > tfoot > tr > td {
+		padding: @ThemeGridPadding; // cell padding
+		border-bottom: @ThemeGridLineWidth solid; // border width, horizontal grid line
+		border-top: 0px;
+		border-left: 0px;
+		border-right: @ThemeGridLineWidth solid; // border width, vertical grid line
+		border-color: @ThemeGridLineColor; // border color
+	}
+    
+	// main table last column cell
+	> thead > tr > td:last-child,
+	> thead > tr > th:last-child,
+	> tbody > tr > td:last-child,
+	> tfoot > tr > td:last-child,
+	td.ewTableLastCol, th.ewTableLastCol {
+		border-right: 0px;
+	}
+    
+	// main table last row cell
+	> tbody:last-child > tr:last-child > td,
+	> tfoot > tr:last-child > td,
+	td.ewTableLastRow {
+		border-bottom: 0px;
+	}
+
+	// main table last row cell with border-bottom
+	> tbody:last-child > tr:last-child > td.ewTableBorderBottom,
+	> tfoot > tr:last-child > td.ewTableBorderBottom,
+	td.ewTableLastRow.ewTableBorderBottom,
+	.ewTableBorderBottom {
+		border-bottom: @ThemeGridLineWidth solid; // border width
+		border-color: @ThemeGridLineColor; // border color
+	}
+
+	> thead > tr > th,
+	> thead > tr > td {
+		font-weight: normal;
+		background-color: @ThemeTableHeaderBackColor; // header bgcolor
+		color: @ThemeTableHeaderTextColor; // header font color
+		border-bottom: @ThemeGridLineWidth solid; // header border width
+		border-right: @ThemeGridLineWidth solid; // header border width
+		border-color: @ThemeTableHeaderBorderColor; // header border color
+		background-repeat: repeat-x;
+		vertical-align: top;
+		padding: 3px;
+	}
+
+	> thead > tr > th when (@ThemeTableHeaderGradient) and (iscolor(@ThemeTableHeaderBackColor)) {
+		#gradient > .vertical(lighten(@ThemeTableHeaderBackColor, 20%), @ThemeTableHeaderBackColor);
+	}
+
+	> thead > tr > td when (@ThemeTableHeaderGradient) and (iscolor(@ThemeTableHeaderBackColor)) {
+		#gradient > .vertical(lighten(@ThemeTableHeaderBackColor, 20%), @ThemeTableHeaderBackColor);
+	}
+	
+	> thead > tr > th when not (iscolor(@ThemeTableHeaderBackColor)) {
+		font-weight: bold;
+		border-bottom-width: 2px;
+	}
+	
+	> thead > tr > td when not (iscolor(@ThemeTableHeaderBackColor)) {
+		font-weight: bold;
+		border-bottom-width: 2px;
+	}
+    
+	.ewTableHeader .ewTableHeaderBtn {
+		.caret {
+			border-top-color: @ThemeTableHeaderTextColor;
+		}
+		.ewSortUp {
+			border-bottom-color: @ThemeTableHeaderTextColor;
+		}
+	}
+    
+	// main table row color
+	.ewTableRow {
+		background-color: @ThemeTableBodyRowColor; // alt row color 1
+		color: @ThemeTableBodyRowTextColor;
+	}
+    
+	// main table alternate row color
+	.ewTableAltRow {
+		background-color: @ThemeTableBodyAlternatingRowColor; // alt row color 2
+		color: @ThemeTableBodyAlternatingRowTextColor;
+	}
+    
+	// main table edit mode row color
+	.ewTableEditRow > td {
+		background-color: @ThemeTableBodyEditRowColor; // edit mode color
+		color: @ThemeTableBodyEditRowTextColor;
+	}
+    
+	// main table highlight color
+	.ewTableHighlightRow > td {
+		background-color: @ThemeTableBodyHighlightRowColor; // highlight color
+		color: @ThemeTableBodyHighlightRowTextColor;
+	}
+    
+	// main table select color
+	.ewTableSelectRow > td {
+		background-color: @ThemeTableBodySelectRowColor; // select color
+		color: @ThemeTableBodySelectRowTextColor;
+	}
+    
+	// main table footer
+	.ewTableFooter {
+		background-color: @ThemeTableFooterBackColor; // footer color
+		color: @ThemeTableFooterTextColor;
+	}
+}
+
+// Checkbox
+.ewCheckbox {
+	text-align: center;
+}
+
+// other option
+.ewOtherOption {
+	display: inline-block;
+}
+
+// add/edit option
+.ewAddEditOption {
+	display: inline-block;
+}
+
+// detail option
+.ewDetailOption {
+	display: inline-block;
+}
+
+// action option
+.ewActionOption {
+	padding-right: 10px;
+	display: inline-block;
+}
+
+.ewMultiColumnForm {
+	
+	> .ewMultiColumnRow {
+		margin-bottom: @line-height-computed;
+	}
+
+	> .ewMultiColumnRow > div[class^=col-] > .table {
+		margin-bottom: 0; // override Bootstrap table margin-bottom
+	}
+	
+	> .ewMultiColumnRow > div[class^=col-] > .table .ewTableHeader {
+		width: 33%; // adjust field caption column width here
+	}
+	
+	.ewMultiColumnListOption .ewListOptionBody[data-name=checkbox] label {
+		margin-top: 0; // override Bootstrap checkbox margin-top/bottom
+		margin-bottom: 0;
+	}
+}
+
+// list option
+.ewMultiColumnListOption {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.ewMultiColumnListOption .ewListOptionBody {
+	float: left;
+}
+
+.ewListOptionHeader label.checkbox, .table th label.checkbox  {
+	margin-bottom: 0;
+}
+
+.ewListOptionSeparator {
+	padding-right: 10px;
+}
+
+.ewListOptionBody {
+
+	.btn-sm {
+		padding-top: @ew-padding-xs-vertical;
+		padding-bottom: @ew-padding-xs-vertical;
+	}
+
+	.btn-group > .btn {
+		float: none;
+	}
+
+	.ewRowLink:hover, .ewRowLink:focus {
+		text-decoration: none;
+	}
+    
+}
+
+// Table for view
+.ewViewTable {
+	min-width: 300px;
+
+	> tbody > tr > td:first-child {
+		font-weight: bold;
+		text-align: right;
+	}
+}
+
+// Preview
+.tab-content .ewGrid {
+	margin-bottom: 0;
+}
+
+// preview lower panel
+.ewPreviewLowerPanel {
+	padding: @ThemeGridPadding;
+	border-left: 0;
+	border-right: 0;
+
+	.ewDetailCount, .ewPreviewOtherOptions {
+		float: left;
+	}
+
+	.ewDetailCount {
+		margin-bottom: @line-height-computed;
+		padding-right: 10px;
+		/*@noflip*/ direction: ltr;
+	}
+}
+
+.icon-expand, .icon-collapse {
+	//font-size: 14px;
+	cursor: pointer;
+}
+
+// table for export to HTML
+.ewExportTable {
+	border: 0;
+	border-spacing: 0;
+	border-collapse: collapse;
+	empty-cells: show;		
+}
+
+.ewExportTable td {
+	padding: @ThemeGridPadding; // cell padding
+	border-bottom: @ThemeGridLineWidth solid; // border width, horizontal grid line
+	border-top: @ThemeGridLineWidth solid; // border width, horizontal grid line
+	border-left: @ThemeGridLineWidth solid; // border width, vertical grid line
+	border-right: @ThemeGridLineWidth solid; // border width, vertical grid line
+	border-color: @ThemeGridLineColor;  // border color
+}
+
+.ewExportTable .ewTableHeader, .ewExportTableHeader td {
+	background-color: @ThemeTableHeaderBackColor; // header bgcolor
+	color: @ThemeTableHeaderTextColor; // header font color
+	border-bottom: @ThemeGridLineWidth solid; // header border width
+	border-right: @ThemeGridLineWidth solid; // header border width
+	border-color: @ThemeTableHeaderBorderColor; // header border color	
+	vertical-align: top; 		
+}
+
+.ewExportTableRow > td {
+	background-color: @ThemeTableBodyRowColor; // alt row color 1
+	color: @ThemeTableBodyRowTextColor;
+}
+
+.ewExportTableAltRow > td {
+	background-color: @ThemeTableBodyAlternatingRowColor; // alt row color 2
+	color: @ThemeTableBodyAlternatingRowTextColor;	
+}
+
+.ewExportTableFooter {
+	background-color: @ThemeTableFooterBackColor; // footer color
+	color: @ThemeTableFooterTextColor;
+}
+
+.ewListExportOptions, .ewViewExportOptions, .ewViewOtherOptions {
+	margin-bottom: @line-height-computed;
+}
+
+.ewRow {
+	margin-bottom: @line-height-computed;
+	white-space: nowrap;
+}
+
+.ewRow .ewCell {
+	padding-right: 10px;
+}
+
+.ewSearchCond, .ewSearchOperator {
+	display: inline-block;
+}
+
+.modal .ewSearchCond {
+	display: block;
+	height: @input-height-base;
+}
+
+.ewSearchCond label {
+	display: inline-block;
+	margin-left: 10px;
+	font-weight: normal;
+}
+
+.ewSearchOperator {
+	color: maroon;
+	font-weight: normal;
+}
+
+// separator
+.ewSeparator {
+	color: gray;
+}
+
+// link separator
+.ewLinkSeparator {
+	padding-right: 10px;
+}
+
+.ewLinkSeparator .ewIcon {
+	display: inline-block;
+}
+
+// email
+#ewEmailForm #subject, #ewEmailForm #message {
+	width: 100%;
+}
+
+#ewEmailForm #message {
+	max-width: 100%;
+}
+
+// report
+.ewReportTable {
+	border: 0px;
+	border-collapse: collapse;
+}
+
+.ewReportTable td {
+	padding: 3px;
+}
+
+.ewGroupIndent {
+	width: 5px;
+}
+
+.ewGroupField {
+	font-weight: bold;
+}
+
+.ewGroupName {
+	font-weight: bold;
+}
+
+.ewGroupHeader {
+	vertical-align: top;
+	border-bottom: 3px double Gray;
+	border-top: 3px double Gray;
+}
+
+.ewGroupSummary {
+	border-top: 1px solid Gray;
+}
+
+.ewGroupAggregate {
+	font-weight: bold;
+}
+
+.ewGrandSummary {
+	border-top: 1px solid Gray;
+}
+
+#ewMsgBox .alert {
+	background-color: transparent;
+	border: 0;
+}
+
+.ewMessageDialog {
+	display: table;
+	min-width: 300px;
+}
+
+/* message - reserved for compatibility */
+.ewMessageTable {
+	margin: 1em 0px 1em 0px;
+}
+
+// required field indicator
+.ewRequired {
+	color: red;
+}
+
+// highlight
+.ewHighlightSearch {
+	font-weight: bold;
+	background-color: yellow;
+}
+
+// template
+.ewTemplate {
+	display: none;
+}
+
+.ewItems { /* v12 */
+	min-width: 200px;
+	
+	.ewItemTable {
+		margin: 0 @padding-base-horizontal @padding-base-horizontal @padding-base-vertical;
+
+		input[type=radio], input[type=checkbox] {
+			margin-top: 0;
+		}
+	}
+
+	.list-group {
+		margin-bottom: @border-radius-base;
+		box-shadow: none;
+		border: 0;	
+	
+		input[type=radio] {
+			display: none;
+		}
+		
+		.radio-inline {
+			width: 100%;
+			padding-top: 3px;
+			padding-bottom: 3px;
+			padding-left: 0;
+		}
+		
+		.list-group-item {
+			padding-top: 0;
+			padding-bottom: 0;
+			border: 0;
+			border-radius: 0;
+		}
+	}
+}
+
+.ewReadOnlyTextArea {
+	padding-bottom: 5px;
+	padding-right: 5px;
+	position: relative;
+}
+
+.ewReadOnlyTextAreaData {
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.ewResizeHandle {
+	height: 5px;
+	width: 5px;
+	bottom: 0;
+	right: 0;
+	cursor: se-resize;
+	position: absolute;
+}
+
+.calendar {
+	z-index: 10000;
+}
+
+.ewUploadTable {
+	margin-bottom: 0;
+}
+
+.ewUploadTable td {
+	border-top: 1px;
+	border-left: 0;
+}
+
+.ewUploadTable .progress {
+	min-width: 75px;
+}
+
+.ewLabelRow {
+	margin-bottom: (@line-height-computed / 4);
+}
+
+.ewLabelRow [id^=elh_], .ewLabelRow .ewSearchCaption {
+	font-weight: bold;
+}
+
+.ewLabelRow > span:after {
+	content: " ";
+}
+
+.ewInputRow {
+	margin-bottom: @line-height-computed;
+}
+
+// override bootstrap table
+.table-striped tbody > tr:nth-child(odd) > td, .table-striped tbody > tr:nth-child(odd) > th { 
+	background-color: transparent; 
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: @table-bg-accent;
+}
+
+.table.ewUploadTable tbody:first-child tr:first-child td {
+	border-top: 0;
+}
+
+// CKEditor
+input.cke_dialog_ui_input_text {
+	min-height: 24px;
+}
+
+// Time picker
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: @brand-primary;
+}
+
+.ewGoogleMap label {
+	width: auto; display: inline;
+}
+
+// spacing under tab
+.nav-tabs, .nav-pills {
+	margin-bottom: @line-height-computed;
+}
+
+/* twitter typeahead */
+.tt-hint {
+	color: @gray-light;
+}
+.tt-dropdown-menu {
+	width: auto;
+	min-width: 160px;
+	/*max-height: 160px;
+	overflow-y: auto;*/ /* Comment out for Scrollable Dropdown Menu */
+	z-index: @zindex-dropdown;
+	position: absolute;
+	margin-top: 1px;
+	padding: 5px 0;
+	background-color: @dropdown-bg;
+	border: 1px solid @dropdown-fallback-border; // IE8 fallback
+	border: 1px solid @dropdown-border;
+	border-radius: @border-radius-base;
+	.box-shadow(0 6px 12px rgba(0,0,0,.175));
+	background-clip: padding-box;
+}
+.tt-suggestion {
+	padding: 3px 20px;
+
+	p {
+		margin: 0;
+	}
+	
+	&.tt-cursor {
+		color: @dropdown-link-hover-color;
+		#gradient > .vertical(@start-color: @dropdown-link-hover-bg; @end-color: darken(@dropdown-link-hover-bg, 5%));
+ 		background-color: darken(@dropdown-link-hover-bg, 5%);
+	}
+}
+
+// spinner
+@keyframes spin {
+	to { .rotate(1turn); }
+}
+
+@-webkit-keyframes spin {
+	to { .rotate(1turn); }
+}
+
+.ewSpinner {	
+	position: relative;
+	display: inline-block;
+	width: 5em;
+	height: 5em; // container height
+	margin: 0 .5em;	
+	overflow: hidden;
+	-webkit-animation: spin 1s infinite steps(8);
+	.animation(spin 1s infinite steps(8));
+	vertical-align: middle;
+	font-size: 4px; // adjust size here
+
+	&:before,
+	&:after,
+	> div:before,
+	> div:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 2.25em; // (container width - part width)/2
+		width: .5em; // part width
+		height: 1.5em; // part height
+		border-radius: .2em;
+		background: #eee;
+		box-shadow: 0 3.5em #eee; // container height - part height
+		.transform-origin(50% 2.5em); // container height / 2
+	}
+	
+	&:before {
+		background: #555;
+	}
+	
+	&:after {
+		.rotate(-45deg);
+		background: #777;
+	}
+	
+	> div:before {
+		.rotate(-90deg);
+		background: #999;
+	}
+	
+	> div:after {
+		.rotate(-135deg);
+		background: #bbb;
+	}
+}
+
+.ewDetailPages {
+	margin-bottom: @line-height-computed;
+}
+
+.ewMultiPage .nav > li.disabled > a {
+	color: #ccc;
+}
+
+.ewCustomTemplate, .ewCustomTemplatePage, .ewCustomTemplateSearch {
+	margin-bottom: @line-height-computed;
+}
+
+.ewGridMiddlePanel .ewCustomTemplate {
+	margin-bottom: 0;
+}
+
+#ignpwd .input-group-btn {
+	width: 1%;
+}
+
+#ignpwd #npwd {
+	width: 100%;
+}
+
+#pgt_npwd, #pst_npwd {
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.ewPasswordGenerator {
+	max-height: @input-height-base;
+	min-height: @input-height-base;
+}
+
+.help-block, .ewPasswordStrengthBar {
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+
+.form-inline .ewItemTable td, .ewDesktopTable .ewItemTable td {
+	padding-top: @padding-base-vertical;
+}
+
+// Scrolling Table
+.ewScrollableTable .ewScrollableTableHeader {
+	overflow: hidden;
+}
+
+.ewScrollableTable .ewScrollableTableHeader > table {
+	border-collapse: separate;
+}
+
+.ewScrollableTable .ewScrollableTableHeader .ewScrollableTableOverhang {
+	padding: 0;
+	border: 0;
+	border-bottom: @ThemeGridLineWidth solid; // header border width
+	border-color: @ThemeTableHeaderBorderColor; // header border color
+	background-color: @ThemeTableHeaderBackColor; // header bgcolor
+	background-repeat: repeat-x;
+}
+
+.ewScrollableTable .ewScrollableTableHeader .ewScrollableTableOverhang when (@ThemeTableHeaderGradient) and (iscolor(@ThemeTableHeaderBackColor)) {
+	#gradient > .vertical(lighten(@ThemeTableHeaderBackColor, 20%), @ThemeTableHeaderBackColor);
+}
+
+.ewScrollableTable .ewListOptionBody .ewButtonGroup .ewIcon {
+	min-width: 16px;
+}
+
+<!--## if (PROJ.GetV("UseResponsiveLayout")) { ##-->
+
+/* desktop */
+@media (min-width: @screen-sm-min) { 
+
+	#ignpwd, #opwd, #npwd, #cpwd, .ewPasswordStrengthBar { // For desktop mode only
+  		width: 300px;
+	}
+
+<!--## } ##-->
+
+	#ewContentTable {
+		display: table;
+	}
+
+	#ewContentRow {
+		display: table-row;
+	}
+
+	#ewMenuColumn, #ewContentColumn {
+		display: table-cell;
+	}
+
+	.ewBasicSearch .ewRow {
+		display: table;
+	}
+
+	.ewViewTable {
+		width: auto;
+	}
+
+	.ewItemTable td {
+		vertical-align: top;
+		padding-right: 20px;
+	}	
+    
+	.ewItemList {
+		display: inline-table;
+	}
+	
+	.ewSearchOperator {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	/* override bootstrap */
+	.form-horizontal {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.form-control {
+		display: inline;
+		width: auto;
+		max-width: none;
+	}
+	.input-group > .form-control,
+	.input-group > .input-group-btn {
+		width: auto;
+	}
+	.form-inline .radio, .form-inline .checkbox, .radio, .checkbox {
+		font-weight: normal;
+		border: none;
+		box-shadow: none;
+		background-color: inherit;
+	}
+	.form-horizontal .radio, .form-horizontal .checkbox {
+		font-weight: normal;
+	}
+	.ewCheckbox {
+		padding-top: 5px;
+		padding-right: 10px;
+		font-weight: normal;
+	}
+	.ewInputLarge {
+		width: 210px;
+	}
+	input[type=text]:not([size]):not([name=pageno]):not(.cke_dialog_ui_input_text),
+	input[type=password]:not([size]) {
+		min-width: 250px;
+	}
+	ul.nav li.dropdown:hover > ul.dropdown-menu {
+		display: block;
+	}
+
+	//
+	// Sub menus
+	//
+	.dropdown-submenu:not(.active):hover > a,
+	.dropdown-submenu:not(.active):focus > a {
+		text-decoration: none;
+		color: @dropdown-link-hover-color;
+		#gradient > .vertical(@start-color: @dropdown-link-hover-bg; @end-color: darken(@dropdown-link-hover-bg, 5%));
+	}
+	.dropdown-submenu {
+		position: relative;
+	}
+	// Default dropdowns
+	.dropdown-submenu > .dropdown-menu {
+		top: 0;
+		left: 100%;
+		margin-top: -6px;
+		margin-left: -1px;
+		border-radius: 0 @border-radius-base @border-radius-base @border-radius-base;
+	}
+	.dropdown-submenu:hover > .dropdown-menu {
+		display: block;
+	}
+	// Caret to indicate there is a submenu
+	.dropdown-submenu > a:after {
+		display: block;
+		content: " ";
+		float: right;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 5px 0 5px 5px;
+		border-left-color: darken(@dropdown-bg, 20%);
+		margin-top: ceil((@line-height-computed - 10px) / 2);
+		margin-right: -10px;
+	}
+	.dropdown-submenu:hover > a:after {
+		border-left-color: @dropdown-link-hover-color;
+	}
+	.dropdown-submenu.active:hover > a:after,
+	.dropdown-submenu.active:focus > a:after {
+		border-left-color: @dropdown-link-active-color;
+	}
+	// Left aligned submenus
+	.dropdown-submenu.pull-left {
+		// Undo the float
+		float: none;
+		
+		// Positioning the submenu
+		> .dropdown-menu {
+			left: -100%;
+			margin-left: 10px;
+			border-radius: @border-radius-base 0 @border-radius-base @border-radius-base;
+		}
+	}
+	// Overwrite navbar style (horizontal)
+	#ewMenuRow .navbar {
+		border-radius: 0;
+		border-left: 0;
+		border-right: 0;
+		margin-bottom: 0;
+	}
+
+	.ewAutoSuggest {
+		display: inline-block;
+	}
+
+	.ewUploadTable {
+		width: auto;
+	}
+
+	.cke, .mce-tinymce {
+		width: @container-sm !important;
+	}
+
+<!--## if (PROJ.GetV("UseResponsiveLayout")) { ##-->
+}
+
+/* mobile */
+@media (max-width: @screen-xs-max) {
+
+	.ewGrid {
+		display: block;
+	}
+
+	.ewGrid .ewGridMiddlePanel {
+		overflow-x: auto;
+		overflow-y: visible;
+	}
+
+	#ewContentTable, #ewContentRow, #ewContentColumn {
+		display: block;
+	}
+
+	.ewMultiColumnForm > .ewMultiColumnRow > div[class^=col-]:not(:last-child) {
+		margin-bottom: 15px; // add margin-bottom if stacked
+	}
+
+	.ewItemTable {
+		width: 100%;
+	}
+
+	.ewItemTable td {
+		display: block;
+		width: 100%;
+	}	
+	
+	.form-horizontal .ewItemTable td {
+		padding-top: 0;
+	}
+    
+	.ewItemTable td:empty {
+		display: none;
+	}	
+   
+	.ewPager .input-group-btn {
+		width: auto; // override Bootstrap 1% width 
+	}
+
+	.ewAddOptBtn {
+		margin-top: @padding-base-vertical;
+	}
+
+	.ewAutoSuggest {
+		display: block;
+	}
+
+	#ewGoogleMap {
+		width: 100% !important;
+	}
+	
+	.ewDesktop {
+		display: block;
+		.ewDesktopTable {
+			border: 0;
+			> tbody > tr {
+				> td {
+					border: 0;
+					padding: 0 0 @padding-base-vertical;
+					display: inline-block;
+				}		
+				> td:first-of-type {
+					text-align: inherit;					
+					padding-right: @padding-base-vertical; 
+				}
+				> td:last-of-type {
+					display: block;
+				}
+			}
+		}		
+	}
+	.table-striped > tbody > tr:nth-child(odd),
+	.table-striped > tbody > tr:nth-child(even),
+	.table-striped > tbody > tr:nth-child(odd) > td,
+	.table-striped > tbody > tr:nth-child(even) > td {
+		background-color: transparent;
+	}
+
+}
+<!--## } ##-->
+
+#ewLoginOptions {
+	text-decoration: none;
+	cursor: pointer;
+	span:before {
+		content: "\e617"; // .icon-arrow-up:before
+	}	
+	&.collapsed span:before {
+		content: "\e616"; // .icon-arrow-down:before
+	}
+}
+
+// Colorbox overlay
+#cboxOverlay{
+	background: #000 none;
+}
+
+// Breadcrumb
+.ewHome, .ewUserPermission { // for Chrome
+	display: inline-block;
+}
+
+// AutoSuggest
+.ewAutoSuggest input[name^=sv_] {
+	vertical-align: baseline !important;
+}
+
+/*END_SYSTEM_STYLES*/
+
+@import "scaffolding.less";
+
