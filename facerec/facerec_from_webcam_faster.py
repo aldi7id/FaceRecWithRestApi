@@ -91,8 +91,8 @@ while True:
                 data = {    'nama' : name,
                             'date': today,
                             'nim': nim,}
-                api_url = "https://aldidwiferdian.000webhostapp.com//mahasiswa"
-                response = requests.post(api_url, data, timeout=5.5)
+                api_url = "https://aldidwiferdian.000webhostapp.com/mahasiswa"
+                response = requests.post(api_url, data)
                 response.json()
                     
                 print(response.text)
